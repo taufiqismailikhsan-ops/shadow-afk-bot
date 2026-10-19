@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0c13"><meta name="description" content="ShadowX AFK Bot dashboard by ShadowX">
+  <title>ShadowX AFK Bot — by ShadowX</title><link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
+  <header class="topbar">
+    <a class="brand" href="#top"><span class="brand-mark">X</span><span><b>ShadowX <em>AFK Bot</em></b><small>by ShadowX</small></span></a>
+    <div class="top-actions"><span class="api-state" id="apiState"><i></i> Backend disconnected</span><button class="icon-button" id="openSettings" aria-label="Open settings" title="Settings">⚙</button></div>
+  </header>
+  <main id="top" class="layout">
+    <section class="hero"><div><div class="eyebrow"><span class="pulse-dot"></span> CONTROL CENTER</div><h1>Your bot.<br><span>Your uptime.</span></h1><p>Monitor the connection, inspect logs, and manage your Minecraft bot from one dashboard.</p></div><div class="hero-emblem"><span>X</span><small>SHADOWX SYSTEMS</small></div></section>
+    <section class="status-row">
+      <article class="panel primary-status"><div class="panel-label">BOT STATUS <span class="status-light" id="statusLight"></span></div><div class="status-main"><div><strong id="botState">OFFLINE</strong><p id="statusDetail">Connect the backend to begin.</p></div><span class="bot-orb" id="botOrb">X</span></div><div class="button-row"><button class="btn btn-primary" id="connectBtn">Connect bot</button><button class="btn btn-quiet" id="disconnectBtn">Disconnect</button></div></article>
+      <article class="panel metric"><div class="panel-label">MINECRAFT SERVER</div><strong id="serverName" class="metric-value">Not configured</strong><p id="serverVersion">Version: —</p><div class="metric-foot"><span class="tiny-dot"></span><span id="reconnectInfo">Auto-reconnect enabled</span></div></article>
+      <article class="panel metric"><div class="panel-label">SESSION</div><strong id="uptime" class="metric-value">—</strong><p id="sessionSince">No active session</p><div class="metric-foot"><span class="tiny-dot"></span><span id="playerInfo">Players: —</span></div></article>
+    </section>
+    <section class="workspace">
+      <article class="panel console-panel"><div class="section-head"><div><div class="panel-label">LIVE OUTPUT</div><h2>Console <span class="live-tag">LIVE</span></h2></div><div class="head-actions"><button class="btn btn-small btn-quiet" id="clearLogs">Clear</button><button class="btn btn-small btn-quiet" id="downloadLogs">Export</button></div></div><div class="console" id="console" role="log" aria-live="polite"><div class="console-placeholder">Waiting for backend connection…</div></div><form id="chatForm" class="chat-form"><span class="prompt">›</span><input id="chatInput" maxlength="256" placeholder="Send a chat message to the bot…" autocomplete="off"><button class="btn btn-primary btn-small" type="submit">Send ↗</button></form></article>
+      <aside class="panel side-panel"><div class="section-head"><div><div class="panel-label">BOT TELEMETRY</div><h2>Overview</h2></div><span class="telemetry-icon">⌁</span></div><div class="telemetry-grid"><div class="telemetry-item"><span>Health</span><strong id="health">—</strong></div><div class="telemetry-item"><span>Food</span><strong id="food">—</strong></div><div class="telemetry-item"><span>Online players</span><strong id="players">—</strong></div><div class="telemetry-item"><span>Reconnects</span><strong id="reconnects">0</strong></div></div><div class="divider"></div><div class="panel-label">POSITION</div><div class="position" id="position">X — &nbsp; Y — &nbsp; Z —</div><div class="divider"></div><div class="panel-label">QUICK SETTINGS</div><div class="quick-setting"><div><b>Auto-reconnect</b><small>Retry after a disconnect</small></div><label class="switch"><input type="checkbox" id="quickReconnect" checked><span></span></label></div><div class="quick-setting"><div><b>Anti-AFK head look</b><small>Occasional head movement</small></div><label class="switch"><input type="checkbox" id="quickAntiAfk"><span></span></label></div><button class="btn btn-outline full-width" id="editConfig">Configure connection <span>↗</span></button></aside>
+    </section>
+    <footer><span><b>SHADOWX AFK BOT</b> <span class="muted">· by ShadowX</span></span><span class="muted">Dashboard hosted separately from the bot backend.</span></footer>
+  </main>
+  <div class="modal-backdrop hidden" id="settingsModal"><section class="modal panel" role="dialog" aria-modal="true" aria-labelledby="settingsTitle"><div class="section-head"><div><div class="panel-label">CONNECTION CONTROL</div><h2 id="settingsTitle">Settings</h2></div><button class="icon-button" id="closeSettings" aria-label="Close settings">×</button></div><form id="settingsForm" class="settings-form">
+    <label class="field full"><span>Backend URL</span><input id="backendUrl" type="url" placeholder="https://your-backend.example.com" required><small>URL of your Node.js backend, not the Netlify URL.</small></label>
+    <label class="field full"><span>API token</span><input id="apiToken" type="password" placeholder="Same API_TOKEN from backend environment" required autocomplete="off"><small>Stored only in this browser's local storage. Do not share it.</small></label>
+    <div class="field-grid"><label class="field"><span>Minecraft host</span><input id="mcHost" placeholder="play.example.net" required></label><label class="field"><span>Port</span><input id="mcPort" type="number" min="1" max="65535" value="25565" required></label></div>
+    <div class="field-grid"><label class="field"><span>Bot username</span><input id="mcUsername" maxlength="16" placeholder="ShadowXBot" required></label><label class="field"><span>Version</span><input id="mcVersion" placeholder="1.21.11 or auto" value="1.21.11"></label></div>
+    <div class="field-grid"><label class="field"><span>Authentication</span><select id="mcAuth"><option value="offline">Offline / cracked server</option><option value="microsoft">Microsoft account</option></select><small>Microsoft login may require backend console authentication.</small></label><label class="field"><span>Reconnect delay (ms)</span><input id="reconnectDelay" type="number" min="3000" max="300000" step="1000" value="10000"></label></div>
+    <div class="field-grid toggle-fields"><label class="check-field"><input type="checkbox" id="cfgReconnect" checked><span><b>Auto-reconnect</b><small>Reconnect after unexpected disconnects</small></span></label><label class="check-field"><input type="checkbox" id="cfgAntiAfk"><span><b>Anti-AFK head look</b><small>Moves head occasionally while online</small></span></label></div>
+    <div class="modal-actions"><button type="button" class="btn btn-quiet" id="testBackend">Test backend</button><button type="submit" class="btn btn-primary">Save settings</button></div><p class="form-note" id="settingsNote"></p>
+  </form></section></div>
+  <div class="toast" id="toast" role="status"></div><script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script><script src="/app.js"></script>
+</body></html>
