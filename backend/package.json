@@ -1,1 +1,15 @@
-
+{
+  "name": "shadowx-afk-bot-backend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ShadowX AFK Bot backend for a Netlify dashboard",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=20" },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "mineflayer": "^4.31.0",
+    "socket.io": "^4.8.1"
+  }
+}
